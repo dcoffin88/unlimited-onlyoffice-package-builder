@@ -35,19 +35,6 @@ or in another words (with their own alias):
 - An onlyoffice build GNU/Linux machine (**BUILDM**)
 - An onlyoffice installed machine thanks to official repo packages (**ONLYM**)
 
-## Find and replace
-
-Make sure to download this document, make a copy of it and edit it.
-
-Now you can find and replace the following:
-
-- Find all the `dcoffin88` strings and replace them to your Github organisation/user. Example: `acmeoo`.
-- Find all the `dcoffin88` strings and replace them to your branding (no spaces or fancy characters). Example: `acme`. This will be used for both Git tags and Debian package suffix.
-- Find all the `dcoffin88` strings and replace them to your docker enabled user. Example: `oobuilder`.
-- Given a **x.y.z.t** version that you want to build: ( Example: `8.1.2.3` )
-  - Find all the `9.0.2` strings and replace them to **x.y.z**. Example: `8.1.2`
-  - Find all the `1` strings and replace them to **t**. Example: `3`
-
 ## Github - Fork time
 
 ### Github - Create organisation or user
