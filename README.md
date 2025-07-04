@@ -239,7 +239,7 @@ git push origin v9.0.2.1-dcoffin88
 
 Old stuff that we already have from btactic repos:
 
-- commit (connection limit): cb6100664657bc91a8bae82d005f00dcc0092a9c
+- commit (connection limit): d00bad0d0077e722e78d1c942c5ed3139d535a40
 
 We create a new branch based on the recently fetched tag.
 
@@ -252,35 +252,7 @@ git checkout tags/v9.0.2.1 -b 9.0.2.1-dcoffin88
 Cherry-pick what we already had:
 
 ```
-git cherry-pick cb6100664657bc91a8bae82d005f00dcc0092a9c
-```
-
-Let's push and create appropiate tags:
-
-```
-git push origin 9.0.2.1-dcoffin88
-git tag -a 'v9.0.2.1-dcoffin88' -m '9.0.2.1-dcoffin88'
-git push origin v9.0.2.1-dcoffin88
-```
-
-### web-apps repo update
-
-Old stuff that we already have from btactic repos:
-
-- commit (mobile edit): 2d186b887bd1f445ec038bd9586ba7da3471ba05
-
-We create a new branch based on the recently fetched tag.
-
-```
-cd ~/onlyoffice_repos/web-apps
-git checkout tags/v9.0.2.1 -b 9.0.2.1-dcoffin88
-```
-.
-
-Cherry-pick what we already had:
-
-```
-git cherry-pick 2d186b887bd1f445ec038bd9586ba7da3471ba05
+git cherry-pick d00bad0d0077e722e78d1c942c5ed3139d535a40
 ```
 
 Let's push and create appropiate tags:
