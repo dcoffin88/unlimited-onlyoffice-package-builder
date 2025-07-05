@@ -41,7 +41,6 @@ Make sure to download this document, make a copy of it and edit it.
 
 Now you can find and replace the following:
 
-- Find all the `@@ACME@@` strings and replace them to your branding (no spaces or fancy characters). Example: `acme`. This will be used for both Git tags and Debian package suffix.
 - Find all the `@@OOBUILDER@@` strings and replace them to your docker enabled user. Example: `oobuilder`.
 - Given a **x.y.z.t** version that you want to build: ( Example: `8.1.2.3` )
   - Find all the `@@VERSION-X.Y.Z@@` strings and replace them to **x.y.z**. Example: `8.1.2`
@@ -65,43 +64,24 @@ mkdir ~/onlyoffice_repos
 
 ### Clone your own unlimited-onlyoffice-package-builder repo
 
-You can actuall skip this step but it's nice to have actual repos in your computer just in case they disappear.
+You can actually skip this step but it's nice to have actual repos in your computer just in case they disappear.
 
 ```
 cd ~/onlyoffice_repos
 git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git
 ```
 
-### Clone your own build_tools repo
-
-```
-cd ~/onlyoffice_repos
-git clone git@github.com:dcoffin88/build_tools.git
-```
-
-### Clone your own server repo
-
-```
-cd ~/onlyoffice_repos
-git clone git@github.com:dcoffin88/server.git
-```
-
 ## Add upstream and btactic repos as remotes (DESKTOPM)
 
-We will need to be able to fetch from both upstream (ONLYOFFICE) and btactic repos.
-From upstream we will get the latest tags (useful if you repeat this process in the future).
-And from btactic repos you will get the no-limits commits just in case you don't want to recreate them manually.
-
-We will do this step in one go for all of the needed repos so that it does not take too much space in the document.
+We will need to be able to fetch from both upstream (ONLYOFFICE) repos.
+From upstream we will get the latest tags.
 
 ```
 cd ~/onlyoffice_repos/build_tools
 git remote add upstream-origin git@github.com:ONLYOFFICE/build_tools.git
-git remote add btactic-origin git@github.com:btactic-oo/build_tools.git
 
 cd ~/onlyoffice_repos/server
 git remote add upstream-origin git@github.com:ONLYOFFICE/server.git
-git remote add btactic-origin git@github.com:btactic-oo/server.git
 ```
 
 ## Update and Fetch newest tags (DESKTOPM)
@@ -144,73 +124,74 @@ We just replace the hyphen with a dot. @@VERSION-X.Y.Z@@-@@VERSION-T@@ is now: @
 
 ### build_tools repo update
 
-Old stuff that we already have from btactic repos:
+Old stuff that we already have:
 
-- commit (owner changes in ssh): 7ce465ecb177fd20ebf2b459a69f98312f7a8d3d
-- commit (Custom repos and tags): 7da607da885285fe3cfc9feaf37b1608666039eb
+- commit (base.py): 00103cfcd55785c21b1df754100ade737bf62208
+- commit (readme.md): 62a8198e99ded15aa7b8e32a9e5a95d0a50d4d80
 
 We create a new branch based on the recently fetched tag.
 
 ```
 cd ~/onlyoffice_repos/build_tools
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
+git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
 ```
 
 Cherry-pick what we already had:
 
 ```
-git cherry-pick 7ce465ecb177fd20ebf2b459a69f98312f7a8d3d
-git cherry-pick 7da607da885285fe3cfc9feaf37b1608666039eb
+git cherry-pick 00103cfcd55785c21b1df754100ade737bf62208
+git cherry-pick 62a8198e99ded15aa7b8e32a9e5a95d0a50d4d80
 ```
-.
-
-Find and replace btactic organisation and its suffix with our own:
-```
-sed -i 's/unlimited_organization = "btactic-oo"/unlimited_organization = "dcoffin88"/g' scripts/base.py
-sed -i 's/unlimited_tag_suffix = "-btactic"/unlimited_tag_suffix = "-@@ACME@@"/g' scripts/base.py
-```
-.
 
 Amend the last commit to use our own tags.
 ```
 git add scripts/base.py
+git add README.md
 git commit --amend --no-edit
 ```
 
-Let's push and create appropiate tags:
+Let's push and create appropriate tags:
 
 ```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
+git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
+git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
 ```
 
 ### server repo update
 
 Old stuff that we already have from btactic repos:
 
-- commit (connection limit): cb6100664657bc91a8bae82d005f00dcc0092a9c
+- commit (constants.js): 9b20536df0f9e167182752ede70b7072b31c4458
+- commit (readme.md): a1390afb41f3bec4c355a2a5c99b7fdc49dcb8af
 
 We create a new branch based on the recently fetched tag.
 
 ```
 cd ~/onlyoffice_repos/server
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
+git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
 ```
-.
 
 Cherry-pick what we already had:
 
 ```
-git cherry-pick cb6100664657bc91a8bae82d005f00dcc0092a9c
+git cherry-pick 9b20536df0f9e167182752ede70b7072b31c4458
+git cherry-pick a1390afb41f3bec4c355a2a5c99b7fdc49dcb8af
 ```
 
-Let's push and create appropiate tags:
+Amend the last commit to use our own tags.
+```
+git add Common/sources/constants.js
+git add Readme.md
+git commit --amend --no-edit
+```
+
+Let's push and create appropriate tags:
 
 ```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
+git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
+git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
 ```
 
 ## Decide where to build
@@ -324,12 +305,12 @@ git clone https://github.com/dcoffin88/unlimited-onlyoffice-package-builder
 cd unlimited-onlyoffice-package-builder
 git checkout v0.0.1
 # Ignore detached HEAD message
-./onlyoffice-package-builder.sh --product-version=@@VERSION-X.Y.Z@@ --build-number=@@VERSION-T@@ --unlimited-organization=dcoffin88 --tag-suffix=-@@ACME@@ --debian-package-suffix=-@@ACME@@
+./onlyoffice-package-builder.sh --product-version=@@VERSION-X.Y.Z@@ --build-number=@@VERSION-T@@ --unlimited-organization=dcoffin88 --tag-suffix=-dcoffin88 --debian-package-suffix=-dcoffin88
 ```
 
 ### Final deb package
 
-The final `onlyoffice-documentserver_@@VERSION-X.Y.Z@@-@@VERSION-T@@-@@ACME@@_amd64.deb` deb package can be found at: `~/build-oo/unlimited-onlyoffice-package-builder/document-server-package/deb/` directory.
+The final `onlyoffice-documentserver_@@VERSION-X.Y.Z@@-@@VERSION-T@@-dcoffin88_amd64.deb` deb package can be found at: `~/build-oo/unlimited-onlyoffice-package-builder/document-server-package/deb/` directory.
 
 If you wanted to build in your own VPS **you are done.**
 
@@ -344,10 +325,10 @@ Visit [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions
 ```
 cd ~/onlyoffice_repos/unlimited-onlyoffice-package-builder
 git checkout main
-sed -i 's/DEBIAN_PACKAGE_SUFFIX: -btactic/DEBIAN_PACKAGE_SUFFIX: -@@ACME@@/g' .github/workflows/build-release-debian-11.yml
-sed -i 's/TAG_SUFFIX: -btactic/TAG_SUFFIX: -@@ACME@@/g' .github/workflows/build-release-debian-11.yml
+sed -i 's/DEBIAN_PACKAGE_SUFFIX: -btactic/DEBIAN_PACKAGE_SUFFIX: -dcoffin88/g' .github/workflows/build-release-debian-11.yml
+sed -i 's/TAG_SUFFIX: -btactic/TAG_SUFFIX: -dcoffin88/g' .github/workflows/build-release-debian-11.yml
 git add .github/workflows/build-release-debian-11.yml
-git commit -m 'Use @@ACME@@ as a suffix in Github Actions'
+git commit -m 'Use dcoffin88 as a suffix in Github Actions'
 git push origin main
 ```
 
