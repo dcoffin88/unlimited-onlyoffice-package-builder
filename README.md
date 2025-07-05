@@ -43,32 +43,18 @@ Make sure that your user has had its own [ssh keys associated to your Github use
 mkdir ~/onlyoffice_repos
 ```
 
-### Clone your own unlimited-onlyoffice-package-builder repo
-
-You can actually skip this step but it's nice to have actual repos in your computer just in case they disappear.
+### Clone your repos
 
 ```
 cd ~/onlyoffice_repos
 git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git
-```
-
-### Clone your own build_tools repo
-
-```
-cd ~/onlyoffice_repos
 git clone git@github.com:dcoffin88/build_tools.git
-```
-
-### Clone your own server repo
-
-```
-cd ~/onlyoffice_repos
 git clone git@github.com:dcoffin88/server.git
+git clone git@github.com:dcoffin88/Docker-DocumentServer.git
 ```
 
 ## Add upstream repos as remotes (DESKTOPM)
 
-We will need to be able to fetch from both upstream (ONLYOFFICE) repos.
 From upstream we will get the latest tags.
 
 ```
@@ -77,11 +63,12 @@ git remote add upstream-origin git@github.com:ONLYOFFICE/build_tools.git
 
 cd ~/onlyoffice_repos/server
 git remote add upstream-origin git@github.com:ONLYOFFICE/server.git
+
+cd ~/onlyoffice_repos/Docker-DocumentServer
+git remote add upstream-origin git@github.com:ONLYOFFICE/Docker-DocumentServer.git
 ```
 
 ## Update and Fetch newest tags (DESKTOPM)
-
-Once again we do it in one go.
 
 ```
 cd ~/onlyoffice_repos/build_tools
