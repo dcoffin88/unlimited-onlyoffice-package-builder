@@ -52,7 +52,21 @@ cd ~/onlyoffice_repos
 git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git
 ```
 
-## Add upstream and btactic repos as remotes (DESKTOPM)
+### Clone your own build_tools repo
+
+```
+cd ~/onlyoffice_repos
+git clone git@github.com:dcoffin88/build_tools.git
+```
+
+### Clone your own server repo
+
+```
+cd ~/onlyoffice_repos
+git clone git@github.com:dcoffin88/server.git
+```
+
+## Add upstream repos as remotes (DESKTOPM)
 
 We will need to be able to fetch from both upstream (ONLYOFFICE) repos.
 From upstream we will get the latest tags.
