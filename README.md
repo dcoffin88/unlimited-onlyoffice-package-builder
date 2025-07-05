@@ -200,31 +200,31 @@ Old stuff that we already have:
 We create a new branch based on the recently fetched tag.
 
 ```
-cd ~/onlyoffice_repos/build_tools
+cd ~/onlyoffice_repos/Docker-DocumentServer && \
 git checkout tags/v9.0.3.26 -b 9.0.3.26-dcoffin88
 ```
 
 Cherry-pick what we already had:
 
 ```
-git cherry-pick a6e4faae0e96afdf846409b316199523b26a2840
-git cherry-pick 6e309ae94c1d4972e4675d77a5d4aa5837be4fc2
-got cherry-pick 710f030415cc5832f16c39a949fb703ae494fb9e
+git cherry-pick a6e4faae0e96afdf846409b316199523b26a2840 && \
+git cherry-pick 6e309ae94c1d4972e4675d77a5d4aa5837be4fc2 && \
+git cherry-pick e9a3733dac77c8b15f7f5106b8211a15effc5454
 ```
 
 Amend the last commit to use our own tags.
 ```
-git add Dockerfile
-git add run-document-server.sh
-git add README.md
+git add Dockerfile && \
+git add run-document-server.sh && \
+git add README.md && \
 git commit --amend --no-edit
 ```
 
 Let's push and create appropriate tags:
 
 ```
-git push origin 9.0.3.26-dcoffin88
-git tag -a 'v9.0.3.26-dcoffin88' -m '9.0.3.26-dcoffin88'
+git push origin 9.0.3.26-dcoffin88 && \
+git tag -a 'v9.0.3.26-dcoffin88' -m '9.0.3.26-dcoffin88' && \
 git push origin v9.0.3.26-dcoffin88
 ```
 
