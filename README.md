@@ -75,14 +75,23 @@ git remote add upstream-origin git@github.com:ONLYOFFICE/Docker-DocumentServer.g
 ## Update and Fetch newest tags (DESKTOPM)
 
 ```
-cd ~/onlyoffice_repos/build_tools
-git checkout master
-git pull upstream-origin master
+cd ~/onlyoffice_repos/build_tools && \
+git checkout master && \
+git pull upstream-origin master && \
 git fetch --all --tags
+```
 
-cd ~/onlyoffice_repos/server
-git checkout master
-git pull upstream-origin master
+```
+cd ~/onlyoffice_repos/server && \
+git checkout master && \
+git pull upstream-origin master && \
+git fetch --all --tags
+```
+
+```
+cd ~/onlyoffice_repos/Docker-DocumentServer && \
+git checkout master && \
+git pull upstream-origin master && \
 git fetch --all --tags
 ```
 
@@ -169,6 +178,45 @@ Amend the last commit to use our own tags.
 ```
 git add Common/sources/constants.js
 git add Readme.md
+git commit --amend --no-edit
+```
+
+Let's push and create appropriate tags:
+
+```
+git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
+git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+```
+
+### Docker-DocumentServer repo update
+
+Old stuff that we already have:
+
+- commit (dockerfile): a6e4faae0e96afdf846409b316199523b26a2840
+- commit (run-document-server.sh) : 6e309ae94c1d4972e4675d77a5d4aa5837be4fc2
+- commit (readme.md): 710f030415cc5832f16c39a949fb703ae494fb9e
+
+We create a new branch based on the recently fetched tag.
+
+```
+cd ~/onlyoffice_repos/build_tools
+git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+```
+
+Cherry-pick what we already had:
+
+```
+git cherry-pick a6e4faae0e96afdf846409b316199523b26a2840
+git cherry-pick 6e309ae94c1d4972e4675d77a5d4aa5837be4fc2
+got cherry-pick 710f030415cc5832f16c39a949fb703ae494fb9e
+```
+
+Amend the last commit to use our own tags.
+```
+git add Dockerfile
+git add run-document-server.sh
+git add README.md
 git commit --amend --no-edit
 ```
 
