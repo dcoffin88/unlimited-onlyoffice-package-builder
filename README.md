@@ -24,8 +24,8 @@ Now you can find and replace the following:
 
 - Find all the `@@OOBUILDER@@` strings and replace them to your docker enabled user. Example: `oobuilder`.
 - Given a **x.y.z.t** version that you want to build: ( Example: `8.1.2.3` )
-  - Find all the `@@VERSION-X.Y.Z@@` strings and replace them to **x.y.z**. Example: `8.1.2`
-  - Find all the `@@VERSION-T@@` strings and replace them to **t**. Example: `3`
+  - Find all the `9.0.2` strings and replace them to **x.y.z**. Example: `8.1.2`
+  - Find all the `26` strings and replace them to **t**. Example: `3`
 
 ## Prepare new local repos (DESKTOPM)
 
@@ -108,12 +108,12 @@ OnlyOffice guys never update the default one so no bother to update it or any of
 sudo apt update
 sudo apt-cache show onlyoffice-documentserver | less
 ```
-The most recent @@VERSION-X.Y.Z@@ version is:
+The most recent 9.0.2 version is:
 
-@@VERSION-X.Y.Z@@-@@VERSION-T@@
+9.0.2-26
 
 so that's the version that we will be using.
-We just replace the hyphen with a dot. @@VERSION-X.Y.Z@@-@@VERSION-T@@ is now: @@VERSION-X.Y.Z@@.@@VERSION-T@@.
+We just replace the hyphen with a dot. 9.0.2-26 is now: 9.0.2.26.
 
 ## Apply no-limits to our repos (DESKTOPM)
 
@@ -128,7 +128,7 @@ We create a new branch based on the recently fetched tag.
 
 ```
 cd ~/onlyoffice_repos/build_tools
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git checkout tags/v9.0.2.26 -b 9.0.2.26-dcoffin88
 ```
 
 Cherry-pick what we already had:
@@ -148,9 +148,9 @@ git commit --amend --no-edit
 Let's push and create appropriate tags:
 
 ```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git push origin 9.0.2.26-dcoffin88
+git tag -a 'v9.0.2.26-dcoffin88' -m '9.0.2.26-dcoffin88'
+git push origin v9.0.2.26-dcoffin88
 ```
 
 ### server repo update
@@ -164,7 +164,7 @@ We create a new branch based on the recently fetched tag.
 
 ```
 cd ~/onlyoffice_repos/server
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git checkout tags/v9.0.2.26 -b 9.0.2.26-dcoffin88
 ```
 
 Cherry-pick what we already had:
@@ -184,9 +184,9 @@ git commit --amend --no-edit
 Let's push and create appropriate tags:
 
 ```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git push origin 9.0.2.26-dcoffin88
+git tag -a 'v9.0.2.26-dcoffin88' -m '9.0.2.26-dcoffin88'
+git push origin v9.0.2.26-dcoffin88
 ```
 
 ### Docker-DocumentServer repo update
@@ -201,7 +201,7 @@ We create a new branch based on the recently fetched tag.
 
 ```
 cd ~/onlyoffice_repos/build_tools
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git checkout tags/v9.0.2.26 -b 9.0.2.26-dcoffin88
 ```
 
 Cherry-pick what we already had:
@@ -223,9 +223,9 @@ git commit --amend --no-edit
 Let's push and create appropriate tags:
 
 ```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-dcoffin88
+git push origin 9.0.2.26-dcoffin88
+git tag -a 'v9.0.2.26-dcoffin88' -m '9.0.2.26-dcoffin88'
+git push origin v9.0.2.26-dcoffin88
 ```
 
 ## Decide where to build
@@ -339,12 +339,12 @@ git clone https://github.com/dcoffin88/unlimited-onlyoffice-package-builder
 cd unlimited-onlyoffice-package-builder
 git checkout v0.0.1
 # Ignore detached HEAD message
-./onlyoffice-package-builder.sh --product-version=@@VERSION-X.Y.Z@@ --build-number=@@VERSION-T@@ --unlimited-organization=dcoffin88 --tag-suffix=-dcoffin88 --debian-package-suffix=-dcoffin88
+./onlyoffice-package-builder.sh --product-version=9.0.2 --build-number=26 --unlimited-organization=dcoffin88 --tag-suffix=-dcoffin88 --debian-package-suffix=-dcoffin88
 ```
 
 ### Final deb package
 
-The final `onlyoffice-documentserver_@@VERSION-X.Y.Z@@-@@VERSION-T@@-dcoffin88_amd64.deb` deb package can be found at: `~/build-oo/unlimited-onlyoffice-package-builder/document-server-package/deb/` directory.
+The final `onlyoffice-documentserver_9.0.2-26-dcoffin88_amd64.deb` deb package can be found at: `~/build-oo/unlimited-onlyoffice-package-builder/document-server-package/deb/` directory.
 
 If you wanted to build in your own VPS **you are done.**
 
@@ -372,8 +372,8 @@ git push origin main
 cd ~/onlyoffice_repos/unlimited-onlyoffice-package-builder
 git checkout main
 git push origin main # Just to be safe
-git tag -a 'builds-debian-11/@@VERSION-X.Y.Z@@.@@VERSION-T@@' -m 'builds-debian-11/@@VERSION-X.Y.Z@@.@@VERSION-T@@'
-git push origin 'builds-debian-11/@@VERSION-X.Y.Z@@.@@VERSION-T@@'
+git tag -a 'builds-debian-11/9.0.2.26' -m 'builds-debian-11/9.0.2.26'
+git push origin 'builds-debian-11/9.0.2.26'
 ```
 .
 
