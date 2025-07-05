@@ -46,10 +46,10 @@ mkdir ~/onlyoffice_repos
 ### Clone your repos
 
 ```
-cd ~/onlyoffice_repos
-git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git
-git clone git@github.com:dcoffin88/build_tools.git
-git clone git@github.com:dcoffin88/server.git
+cd ~/onlyoffice_repos && \
+git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git && \
+git clone git@github.com:dcoffin88/build_tools.git && \
+git clone git@github.com:dcoffin88/server.git && \
 git clone git@github.com:dcoffin88/Docker-DocumentServer.git
 ```
 
@@ -58,13 +58,17 @@ git clone git@github.com:dcoffin88/Docker-DocumentServer.git
 From upstream we will get the latest tags.
 
 ```
-cd ~/onlyoffice_repos/build_tools
+cd ~/onlyoffice_repos/build_tools && \
 git remote add upstream-origin git@github.com:ONLYOFFICE/build_tools.git
+```
 
-cd ~/onlyoffice_repos/server
+```
+cd ~/onlyoffice_repos/server && \
 git remote add upstream-origin git@github.com:ONLYOFFICE/server.git
+```
 
-cd ~/onlyoffice_repos/Docker-DocumentServer
+```
+cd ~/onlyoffice_repos/Docker-DocumentServer && \
 git remote add upstream-origin git@github.com:ONLYOFFICE/Docker-DocumentServer.git
 ```
 
