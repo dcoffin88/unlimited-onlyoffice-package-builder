@@ -41,58 +41,11 @@ Make sure to download this document, make a copy of it and edit it.
 
 Now you can find and replace the following:
 
-- Find all the `@@ACMEOO@@` strings and replace them to your Github organisation/user. Example: `acmeoo`.
 - Find all the `@@ACME@@` strings and replace them to your branding (no spaces or fancy characters). Example: `acme`. This will be used for both Git tags and Debian package suffix.
 - Find all the `@@OOBUILDER@@` strings and replace them to your docker enabled user. Example: `oobuilder`.
 - Given a **x.y.z.t** version that you want to build: ( Example: `8.1.2.3` )
   - Find all the `@@VERSION-X.Y.Z@@` strings and replace them to **x.y.z**. Example: `8.1.2`
   - Find all the `@@VERSION-T@@` strings and replace them to **t**. Example: `3`
-
-## Github - Fork time
-
-### Github - Create organisation or user
-
-First of all you need to create a Github account/user, a Github organisation, or reuse your existant Github account/user.
-
-### Login onto your Github account
-
-You should know how to login onto your Github account. Go ahead and login there.
-
-### Fork btactic's unlimited-onlyoffice-package-builder
-
-- Visit [btactic-oo's unlimited-onlyoffice-package-builder repo](https://github.com/btactic-oo/unlimited-onlyoffice-package-builder).
-- Click on **Fork** button.
-- Select `@@ACMEOO@@` as the Owner.
-- Uncheck 'Copy the main branch only'
-- **Do not modify** Repository name
-- Click on **Create fork** button
-
-### Fork ONLYOFFICE's build_tools
-
-- Visit [ONLYOFFICE's build_tools repo](https://github.com/ONLYOFFICE/build_tools).
-- Click on **Fork** button.
-- Select `@@ACMEOO@@` as the Owner.
-- Uncheck 'Copy the main branch only'
-- **Do not modify** Repository name
-- Click on **Create fork** button
-
-### Fork ONLYOFFICE's server
-
-- Visit [ONLYOFFICE's server repo](https://github.com/ONLYOFFICE/server).
-- Click on **Fork** button.
-- Select `@@ACMEOO@@` as the Owner.
-- Uncheck 'Copy the main branch only'
-- **Do not modify** Repository name
-- Click on **Create fork** button
-
-### Fork ONLYOFFICE's web-apps
-
-- Visit [ONLYOFFICE's web-apps repo](https://github.com/ONLYOFFICE/web-apps).
-- Click on **Fork** button.
-- Select `@@ACMEOO@@` as the Owner.
-- Uncheck 'Copy the main branch only'
-- **Do not modify** Repository name
-- Click on **Create fork** button
 
 ## Prepare new local repos (DESKTOPM)
 
@@ -116,28 +69,21 @@ You can actuall skip this step but it's nice to have actual repos in your comput
 
 ```
 cd ~/onlyoffice_repos
-git clone git@github.com:@@ACMEOO@@/unlimited-onlyoffice-package-builder.git
+git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git
 ```
 
 ### Clone your own build_tools repo
 
 ```
 cd ~/onlyoffice_repos
-git clone git@github.com:@@ACMEOO@@/build_tools.git
+git clone git@github.com:dcoffin88/build_tools.git
 ```
 
 ### Clone your own server repo
 
 ```
 cd ~/onlyoffice_repos
-git clone git@github.com:@@ACMEOO@@/server.git
-```
-
-### Clone your own web-apps repo
-
-```
-cd ~/onlyoffice_repos
-git clone git@github.com:@@ACMEOO@@/web-apps.git
+git clone git@github.com:dcoffin88/server.git
 ```
 
 ## Add upstream and btactic repos as remotes (DESKTOPM)
@@ -156,10 +102,6 @@ git remote add btactic-origin git@github.com:btactic-oo/build_tools.git
 cd ~/onlyoffice_repos/server
 git remote add upstream-origin git@github.com:ONLYOFFICE/server.git
 git remote add btactic-origin git@github.com:btactic-oo/server.git
-
-cd ~/onlyoffice_repos/web-apps
-git remote add upstream-origin git@github.com:ONLYOFFICE/web-apps.git
-git remote add btactic-origin git@github.com:btactic-oo/web-apps.git
 ```
 
 ## Update and Fetch newest tags (DESKTOPM)
@@ -173,11 +115,6 @@ git pull upstream-origin master
 git fetch --all --tags
 
 cd ~/onlyoffice_repos/server
-git checkout master
-git pull upstream-origin master
-git fetch --all --tags
-
-cd ~/onlyoffice_repos/web-apps
 git checkout master
 git pull upstream-origin master
 git fetch --all --tags
@@ -229,7 +166,7 @@ git cherry-pick 7da607da885285fe3cfc9feaf37b1608666039eb
 
 Find and replace btactic organisation and its suffix with our own:
 ```
-sed -i 's/unlimited_organization = "btactic-oo"/unlimited_organization = "@@ACMEOO@@"/g' scripts/base.py
+sed -i 's/unlimited_organization = "btactic-oo"/unlimited_organization = "dcoffin88"/g' scripts/base.py
 sed -i 's/unlimited_tag_suffix = "-btactic"/unlimited_tag_suffix = "-@@ACME@@"/g' scripts/base.py
 ```
 .
@@ -266,34 +203,6 @@ Cherry-pick what we already had:
 
 ```
 git cherry-pick cb6100664657bc91a8bae82d005f00dcc0092a9c
-```
-
-Let's push and create appropiate tags:
-
-```
-git push origin @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
-git tag -a 'v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@' -m '@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@'
-git push origin v@@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
-```
-
-### web-apps repo update
-
-Old stuff that we already have from btactic repos:
-
-- commit (mobile edit): 2d186b887bd1f445ec038bd9586ba7da3471ba05
-
-We create a new branch based on the recently fetched tag.
-
-```
-cd ~/onlyoffice_repos/web-apps
-git checkout tags/v@@VERSION-X.Y.Z@@.@@VERSION-T@@ -b @@VERSION-X.Y.Z@@.@@VERSION-T@@-@@ACME@@
-```
-.
-
-Cherry-pick what we already had:
-
-```
-git cherry-pick 2d186b887bd1f445ec038bd9586ba7da3471ba05
 ```
 
 Let's push and create appropiate tags:
@@ -411,11 +320,11 @@ As the `@@OOBUILDER@@` user run:
 ```
 mkdir ~/build-oo
 cd ~/build-oo
-git clone https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder
+git clone https://github.com/dcoffin88/unlimited-onlyoffice-package-builder
 cd unlimited-onlyoffice-package-builder
 git checkout v0.0.1
 # Ignore detached HEAD message
-./onlyoffice-package-builder.sh --product-version=@@VERSION-X.Y.Z@@ --build-number=@@VERSION-T@@ --unlimited-organization=@@ACMEOO@@ --tag-suffix=-@@ACME@@ --debian-package-suffix=-@@ACME@@
+./onlyoffice-package-builder.sh --product-version=@@VERSION-X.Y.Z@@ --build-number=@@VERSION-T@@ --unlimited-organization=dcoffin88 --tag-suffix=-@@ACME@@ --debian-package-suffix=-@@ACME@@
 ```
 
 ### Final deb package
@@ -428,7 +337,7 @@ If you wanted to build in your own VPS **you are done.**
 
 ### Enable Github Actions
 
-Visit [https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/actions](https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/actions) and click on the **I understand my workflows, go ahead and enable them** button.
+Visit [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions) and click on the **I understand my workflows, go ahead and enable them** button.
 
 ### Use your repos when running Github Actions
 
@@ -453,9 +362,9 @@ git push origin 'builds-debian-11/@@VERSION-X.Y.Z@@.@@VERSION-T@@'
 ```
 .
 
-Release based on Github Actions which you can check in: [https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/actions](https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/actions) should end succesfully after about 2h30m build time.
+Release based on Github Actions which you can check in: [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions) should end succesfully after about 2h30m build time.
 
-Check the new release at: [https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/releases](https://github.com/@@ACMEOO@@/unlimited-onlyoffice-package-builder/releases).
+Check the new release at: [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/releases](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/releases).
 
 If you wanted to build in Github **you are done.**
 
