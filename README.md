@@ -1,23 +1,4 @@
-# Build OnlyOffice on newer OnlyOffice versions (with no limits)
-
-## Introduction
-
-- Did the btactic-oo repos stalled at an old date in the past?
-- Do you need to build a newer onlyoffice version than the one that btactic-oo `unlimited-onlyoffice-package-builder` repo released ?
-- Do you want to have an unlimited onlyoffice repos instead of the default one limited to 20 connections?
-- Do you want to use Github Actions so that you know you have the resources to build everything?
-
-Well, in this case this document is for you.
-
-You will be able to produce a Debian 11 DEB package that might also work on other Debian/Ubuntu systems.
-
-If you have already followed these instructions and you are reusing your DESKTOPM machine and you want to build a newer Onlyoffice version you can skip to the: [Update and Fetch newest tags (DESKTOPM)](#update-and-fetch-newest-tags-desktopm) section.
-
-## About development logs
-
-This specific documentation won't be updated so much.
-It will be based on the current latest simplified documentation which it's *2024 09*.
-Please check [development_logs/ directory](development_logs/). You might want to cherry-pick some commits from there instead of the *2024 09* ones which will be used here.
+# Build OnlyOffice
 
 ## Requisites
 
