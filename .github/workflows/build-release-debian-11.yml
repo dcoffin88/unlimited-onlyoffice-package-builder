@@ -25,12 +25,11 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           df -h
       - name: Free Space - Remove swap
-        run: |
-          if: ${{ !env.ACT }}
-            run: |
-              sudo swapoff -a
-              sudo rm -f /swapfile
-              df -h
+        if: ${{ !env.ACT }}
+          run: |
+            sudo swapoff -a
+            sudo rm -f /swapfile
+            df -h
       - name: Free Space - Remove boost & tools
         run: |
           sudo rm -rf "/usr/local/share/boost"
