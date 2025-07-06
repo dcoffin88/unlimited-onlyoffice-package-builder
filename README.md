@@ -46,7 +46,7 @@ mkdir ~/onlyoffice_repos
 
 ```
 cd ~/onlyoffice_repos && \
-git clone git@github.com:dcoffin88/unlimited-onlyoffice-package-builder.git && \
+git clone git@github.com:dcoffin88/onlyoffice-package-builder.git && \
 git clone git@github.com:dcoffin88/build_tools.git && \
 git clone git@github.com:dcoffin88/server.git && \
 git clone git@github.com:dcoffin88/Docker-DocumentServer.git
@@ -340,7 +340,7 @@ git checkout v0.0.1
 
 ### Final deb package
 
-The final `onlyoffice-documentserver_9.0.3-26-dcoffin88_amd64.deb` deb package can be found at: `~/build-oo/unlimited-onlyoffice-package-builder/document-server-package/deb/` directory.
+The final `onlyoffice-documentserver_9.0.3-26-dcoffin88_amd64.deb` deb package can be found at: `~/build-oo/onlyoffice-package-builder/document-server-package/deb/` directory.
 
 If you wanted to build in your own VPS **you are done.**
 
