@@ -57,10 +57,12 @@ jobs:
           sudo apt-get clean
           df -h
       - name: Free Space - Show docker images
+        if: ${{ !env.ACT }}
         run: |
           docker image ls -a
           df -h
       - name: Free Space - Remove docker images
+        if: ${{ !env.ACT }}
         run: |
           images=$(docker image ls -aq)
           if [ -n "$images" ]; then
