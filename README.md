@@ -348,12 +348,12 @@ If you wanted to build in your own VPS **you are done.**
 
 ### Enable Github Actions
 
-Visit [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions) and click on the **I understand my workflows, go ahead and enable them** button.
+Visit [https://github.com/dcoffin88/onlyoffice-package-builder/actions](https://github.com/dcoffin88/onlyoffice-package-builder/actions) and click on the **I understand my workflows, go ahead and enable them** button.
 
 ### Use your repos when running Github Actions
 
 ```
-cd ~/onlyoffice_repos/unlimited-onlyoffice-package-builder
+cd ~/onlyoffice_repos/onlyoffice-package-builder
 git checkout main
 sed -i 's/DEBIAN_PACKAGE_SUFFIX: -btactic/DEBIAN_PACKAGE_SUFFIX: -dcoffin88/g' .github/workflows/build-release-debian-11.yml
 sed -i 's/TAG_SUFFIX: -btactic/TAG_SUFFIX: -dcoffin88/g' .github/workflows/build-release-debian-11.yml
@@ -365,7 +365,7 @@ git push origin main
 ### Push to build
 
 ```
-cd ~/onlyoffice_repos/unlimited-onlyoffice-package-builder
+cd ~/onlyoffice_repos/onlyoffice-package-builder
 git checkout main
 git push origin main # Just to be safe
 git tag -a 'builds-debian-11/9.0.3.26' -m 'builds-debian-11/9.0.3.26'
@@ -373,9 +373,9 @@ git push origin 'builds-debian-11/9.0.3.26'
 ```
 .
 
-Release based on Github Actions which you can check in: [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/actions) should end succesfully after about 2h30m build time.
+Release based on Github Actions which you can check in: [https://github.com/dcoffin88/onlyoffice-package-builder/actions](https://github.com/dcoffin88/onlyoffice-package-builder/actions) should end succesfully after about 2h30m build time.
 
-Check the new release at: [https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/releases](https://github.com/dcoffin88/unlimited-onlyoffice-package-builder/releases).
+Check the new release at: [https://github.com/dcoffin88/onlyoffice-package-builder/releases](https://github.com/dcoffin88/onlyoffice-package-builder/releases).
 
 If you wanted to build in Github **you are done.**
 
