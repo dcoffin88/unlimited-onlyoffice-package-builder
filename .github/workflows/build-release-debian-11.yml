@@ -25,12 +25,10 @@ jobs:
           echo "$GITHUB_WORKSPACE"
           df -h
       - name: Free Space - Remove swap
+        if: ${{ !env.ACT }}
         run: |
-          if: ${{ !env.ACT }}
-            sudo swapoff -a
-          else:
-            sudo rm -f /swapfile
-          fi
+          sudo swapoff -a
+          sudo rm -f /swapfile
           df -h
       - name: Free Space - Remove boost & tools
         run: |
