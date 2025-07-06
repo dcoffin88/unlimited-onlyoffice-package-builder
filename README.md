@@ -22,7 +22,6 @@ Make sure to download this document, make a copy of it and edit it.
 
 Now you can find and replace the following:
 
-- Find all the `@@OOBUILDER@@` strings and replace them to your docker enabled user. Example: `oobuilder`.
 - Given a **x.y.z.t** version that you want to build: ( Example: `8.1.2.3` )
   - Find all the `9.0.3` strings and replace them to **x.y.z**. Example: `8.1.2`
   - Find all the `26` strings and replace them to **t**. Example: `3`
@@ -265,7 +264,6 @@ Be aware of RHEL 8 based distributions. Search for a [docker-ce howto](https://c
 ```
 sudo apt-get update
 sudo apt-get remove docker docker-engine docker.io
-sudo apt-get install linux-image-extra-$(uname -r) linux-image-extra-virtual
 sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 ```
 #### Set up docker's apt repository
@@ -273,9 +271,7 @@ sudo apt-get install apt-transport-https ca-certificates curl software-propertie
 ```
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-sudo tee /etc/apt/sources.list.d/docker.list <<EOM
-deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
-EOM
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 sudo apt-get update
 ```
@@ -289,28 +285,28 @@ sudo apt-get install docker-ce
 ### Docker user - Creation
 
 ```
-sudo usermod -a -G docker @@OOBUILDER@@
+sudo usermod -a -G docker sandbox
 ```
 
 ### Docker user - Re-login
 
-In order to be able to use Docker properly from `@@OOBUILDER@@` user you might need to logout and then login to your user.
+In order to be able to use Docker properly from `sandbox` user you might need to logout and then login to your user.
 You might find how to enforce the user Docker group rights without logging out if you search enough but most of the times it's easier to just logout and login.
 
 ### Docker user - Hello world
 
-Also make sure to run the usual 'Hello world' docker examples under the `@@OOBUILDER@@` user.
+Also make sure to run the usual 'Hello world' docker examples under the `sandbox` user.
 These 'Hello world' docker examples are usually explained in most of the docker installation manuals.
 If 'Hello world' docker example does not work as expected then building thanks to our Dockerfiles will definitely not work.
 
 ### Git ssh keys
 
-*Note: The commands below need to be run as the `@@OOBUILDER@@` user.*
+*Note: The commands below need to be run as the `sandbox` user.*
 
 You need to run the command below in order to create a key.
 
 ```
-ssh-keygen -t rsa -b 4096 -C "@@OOBUILDER@@@domain.com"
+ssh-keygen -t rsa -b 4096 -C "14241628+dcoffin88@users.noreply.github.com"
 ```
 
 the email address needs to be the one used for your GitHub account.
@@ -330,13 +326,13 @@ should do it in most of the Debian/Ubuntu systems so that you can later use Git.
 
 ### Build everything
 
-As the `@@OOBUILDER@@` user run:
+As the `sandbox` user run:
 
 ```
 mkdir ~/build-oo
 cd ~/build-oo
-git clone https://github.com/dcoffin88/unlimited-onlyoffice-package-builder
-cd unlimited-onlyoffice-package-builder
+git clone https://github.com/dcoffin88/onlyoffice-package-builder
+cd onlyoffice-package-builder
 git checkout v0.0.1
 # Ignore detached HEAD message
 ./onlyoffice-package-builder.sh --product-version=9.0.3 --build-number=26 --unlimited-organization=dcoffin88 --tag-suffix=-dcoffin88 --debian-package-suffix=-dcoffin88
